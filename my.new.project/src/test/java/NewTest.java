@@ -8,7 +8,7 @@ public class NewTest {
   
   @Test
   public void canUseVar() {
-	  String myString = "Chase";
+	  String myString = "ChaseGlasspoole";
 	  var myVarString = "Chase";
   }
 }
