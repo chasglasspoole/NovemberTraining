@@ -43,7 +43,7 @@ public class DataProviderTests {
   public void canGetCityName() {
 	  var expectedCity = "New Orleans";
 	  
-	  var actualCity = cities.NewOrleans.Name;
+	  var actualCity = Cities.NewOrleans.Name;
 	  
 	  Assert.assertEquals(actualCity, expectedCity, "City Name should be returned.");
   }
@@ -52,7 +52,7 @@ public class DataProviderTests {
   public void canGetZipcode() {
 	  var expectedZipcode = "70125";
 	  
-	  var actualZipcode = cities.NewOrleans.Zipcode;
+	  var actualZipcode = Cities.NewOrleans.Zipcode;
 	  
 	  Assert.assertEquals(actualZipcode, expectedZipcode, "City Zipcode should be returned.");
   }
@@ -84,7 +84,7 @@ public class DataProviderTests {
 	  Assert.assertEquals(actualZipcode, expectedZipcode, "City Zipcode should be returned");
   }
 
-  private Object getZipcode(LocationObjectMother mother) {	
+  private String getZipcode(LocationObjectMother mother) {	
 	return mother.City.Zipcode;
   }
 
