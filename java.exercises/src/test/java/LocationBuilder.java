@@ -16,6 +16,11 @@ public class LocationBuilder {
 		this.mother.City = city;
 		return this;
 	}
+	
+	public LocationBuilder withZipcode(String zipcode) {
+		this.mother.City.Zipcode = zipcode;
+		return this;
+	}
 
 	public LocationObjectMother build() {
 		
