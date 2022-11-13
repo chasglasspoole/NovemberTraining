@@ -6,8 +6,8 @@ public class LocationObjectMothers {
 		
 		return new LocationBuilder()
 				.withState(States.Louisiana)
-				.withCity(cities.NewOrleans)
-				.withZipcode(cities.NewOrleans.Zipcode)
+				.withCity(Cities.NewOrleans)
+				.withZipcode(Cities.NewOrleans.Zipcode)
 				.build();
 	}
 	
@@ -15,8 +15,8 @@ public class LocationObjectMothers {
 		
 		return new LocationBuilder()
 			.withState(States.Texas)
-			.withCity(cities.Houston)
-			.withZipcode(cities.Houston.Zipcode)
+			.withCity(Cities.Houston)
+			.withZipcode(Cities.Houston.Zipcode)
 			.build();
 		
 	}
