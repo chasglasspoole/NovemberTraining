@@ -34,21 +34,8 @@ WHERE FIRST_NAME = "Bob" AND LAST_NAME = "Fawcett";
 
 7. Use a Stored Procedure to get the 4 inventory ids for the film "Alien Center" at Store #2. 
 
-DELIMITER //
-CREATE 
-DEFINER=`root`@`localhost` 
-PROCEDURE `inv_ids`(IN p_film_title VARCHAR(255), IN p_store_id INT)
-	READS SQL DATA
-BEGIN
-	SELECT INVENTORY_ID
-     FROM INVENTORY INNER JOIN FILM ON FILM.FILM_ID = INVENTORY.FILM_ID 
-     WHERE TITLE = p_film_title
-     AND STORE_ID = p_store_id;
-END//
-
-DELIMITER ;
-
-CALL inv_ids("Alien Center", 2)
+SET @f_id = (SELECT FILM_ID FROM FILM WHERE TITLE LIKE "%Alien Center%"); 
+CALL FILM_IN_STOCK(@f_id, 2, @TOTAL);
 
 8. Insert a new store. Ensure that you use TRANSACTION. (This one is possible but it's tough! Pay attention to constraints and the order that you are inserting data.) 
 
@@ -56,9 +43,11 @@ START TRANSACTION;
 
 INSERT INTO STAFF(STAFF_ID, FIRST_NAME, LAST_NAME, ADDRESS_ID, EMAIL, STORE_ID, ACTIVE, USERNAME)
 	VALUES(3, 'Dan', 'Bernardo', 310, 'Danb123@gmail.com', 1, 0, 'Dan');
+	
+SET @s_id = SELECT LAST_INSERT_ID();
     
-INSERT INTO STORE(STORE_ID, MANAGER_STAFF_ID, ADDRESS_ID)
-	VALUES(3, 3, 310);
+INSERT INTO STORE(MANAGER_STAFF_ID, ADDRESS_ID)
+	VALUES(@s_id, 310);
     
 UPDATE STAFF
 	SET STORE_ID = 3, ACTIVE = 1
@@ -70,15 +59,17 @@ COMMIT;
 
 UPDATE STORE
 SET LAST_UPDATE = NOW()
-WHERE STORE_ID = 3;
+WHERE STORE_ID = LAST_INSERT_ID();
 
 10. Delete the new store. 
 
 START TRANSACTION;
 
+SET @s_id = SELECT STAFF_ID FROM STAFF WHERE LAST_NAME = "Bernadro";
+
  UPDATE STAFF 
 	SET STORE_ID = 1, ACTIVE = 0
-    WHERE STAFF_ID = 3;
+    WHERE STAFF_ID = @s_id;
     
 DELETE FROM STORE WHERE STORE_ID = 3;
 
