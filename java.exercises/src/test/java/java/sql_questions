@@ -1,0 +1,115 @@
+Create a new branch called f-sql
+Create a file called Sakila_Project.sql
+
+Sakila Database
+
+Write a SQL statement for each of the following. 
+
+1. Get 10 cities in descending alphabetical order.
+
+SELECT CITY FROM CITY ORDER BY CITY DESC LIMIT 10;
+
+2. Get all films with "airplane" in the title.
+
+SELECT * FROM FILM WHERE TITLE LIKE "%airplane%";
+
+3. Get the highest payment amount.
+
+SELECT MAX(AMOUNT) AS 'Highest Payment' FROM PAYMENT;
+
+4. Get the number of records in the customer table for store id #1.
+
+SELECT COUNT(CUSTOMER_ID) FROM CUSTOMER WHERE STORE_ID = 1;
+
+5. Get all payment records for customer with email address "NANCY.THOMAS@sakilacustomer.org"
+
+SELECT * FROM PAYMENT
+INNER JOIN CUSTOMER USING (CUSTOMER_ID)
+WHERE CUSTOMER.EMAIL = "NANCY.THOMAS@sakilacustomer.org";
+
+6. Use a View to get the film info for actor Bob Fawcett.
+
+SELECT * FROM ACTOR_INFO 
+WHERE FIRST_NAME = "Bob" AND LAST_NAME = "Fawcett";
+
+7. Use a Stored Procedure to get the 4 inventory ids for the film "Alien Center" at Store #2. 
+
+SET @f_id = (SELECT FILM_ID FROM FILM WHERE TITLE LIKE "%Alien Center%"); 
+CALL FILM_IN_STOCK(@f_id, 2, @TOTAL);
+
+8. Insert a new store. Ensure that you use TRANSACTION. (This one is possible but it's tough! Pay attention to constraints and the order that you are inserting data.) 
+
+START TRANSACTION;
+
+INSERT INTO STAFF(STAFF_ID, FIRST_NAME, LAST_NAME, ADDRESS_ID, EMAIL, STORE_ID, ACTIVE, USERNAME)
+	VALUES(3, 'Dan', 'Bernardo', 310, 'Danb123@gmail.com', 1, 0, 'Dan');
+	
+SET @s_id = SELECT LAST_INSERT_ID();
+    
+INSERT INTO STORE(MANAGER_STAFF_ID, ADDRESS_ID)
+	VALUES(@s_id, 310);
+    
+UPDATE STAFF
+	SET STORE_ID = 3, ACTIVE = 1
+	WHERE STAFF_ID = 3;
+    
+COMMIT; 
+
+9. Update the timestamp to the current date/time for the new store you entered in the previous question. 
+
+UPDATE STORE
+SET LAST_UPDATE = NOW()
+WHERE STORE_ID = LAST_INSERT_ID();
+
+10. Delete the new store. 
+
+START TRANSACTION;
+
+SET @s_id = SELECT STAFF_ID FROM STAFF WHERE LAST_NAME = "Bernadro";
+
+ UPDATE STAFF 
+	SET STORE_ID = 1, ACTIVE = 0
+    WHERE STAFF_ID = @s_id;
+    
+DELETE FROM STORE WHERE STORE_ID = 3;
+
+COMMIT;
+
+11. Using one SQL statement, get how many films are there in each rating category.
+
+SELECT RATING, COUNT(FILM_ID) AS '# OF FILMS' FROM FILM 
+GROUP BY RATING;
+
+12. Get (in order) the first and last names of the 3 customers who have spent the most, along with how much they have paid overall.
+
+SELECT FIRST_NAME, LAST_NAME, SUM(AMOUNT) AS 'Overall Payment'
+FROM PAYMENT INNER JOIN CUSTOMER USING(CUSTOMER_ID)
+GROUP BY PAYMENT.CUSTOMER_ID
+ORDER BY SUM(AMOUNT) DESC LIMIT 3;
+
+13. Get all movies rented by the customer who spent the most. (Hint: This will either require nested queries, or more than two joins. one approach is much shorter than the other.)
+
+SELECT FILM.FILM_ID, TITLE
+FROM FILM INNER JOIN INVENTORY USING(FILM_ID)
+INNER JOIN RENTAL USING(INVENTORY_ID)
+INNER JOIN PAYMENT USING(RENTAL_ID)
+WHERE PAYMENT.CUSTOMER_ID = (SELECT CUSTOMER_ID
+FROM(
+SELECT CUSTOMER_ID, SUM(AMOUNT) AS pay_sum 
+FROM PAYMENT  
+GROUP BY CUSTOMER_ID) pay_sum
+HAVING MAX(pay_sum))
+
+14. Get the first and last names of all customers who spent more than $150, along with how much they spent.
+
+SELECT FIRST_NAME, LAST_NAME, SUM(AMOUNT) AS 'Total Spent'
+FROM PAYMENT INNER JOIN CUSTOMER USING(CUSTOMER_ID)
+GROUP BY PAYMENT.CUSTOMER_ID
+HAVING SUM(AMOUNT) > 150
+
+Do not hard code IDs.
+
+https://dev.mysql.com/doc/sakila/en/sakila-introduction.html
+
+Schema Diagram:
+https://www.jooq.org/sakila#:~:text=The%20Sakila%20database%20is%20a,films%2C%20stores%2C%20and%20rentals.
