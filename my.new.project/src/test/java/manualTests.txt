@@ -1,0 +1,43 @@
+Manual tests
+
+1.T-Can use search bar 
+	As a user I can use the search bar to find the product, svt-810e, and any information about it.
+	User must be on a page with the search bar and enter the correct search term
+	Requirements - search bar and search engine functionality
+	Click the search bar and enter 'svt-810e'
+	A search engine should return results similar to search, with the desired product as the first link 
+	
+2. T-Can sign in to account
+	As a user I can sign into my account on the web site.
+	User must already be registered and must enter their correct login credentials
+	Requirement - Log in functionality  
+	From the home page, click the account icon in the upper right corner and enter the correct username and password combination. Then click sign in.
+	User should be successfully signed in and account icon should be colored red
+	
+3. T-Can find history book
+	As a user I can navigate to the Amazon listing of 'The Story Behind the Sound' from the history page
+	User is on the Ampeg.com home page
+	Requirement - History page and link functionality
+	Click the history tab at the top of the page. Scroll to the bottom and click the Amazon.com link
+	User should be redirected to the Amazon listing of 'The Story Behind the Sound' in a new tab.
+	
+4. T-Can download manual
+	As a user I can navigate to the V-4B manuals page and download the manual pdf
+	User must on the support page and must have more than 1300 KB of download space
+	Requirements - Support page, download functionality
+	Click on CURRENT MANUALS and select the V-B4 image. Next Click the pfd icon in the Owner's Manual row and English column. In the pdf viewer, click the download icon.
+	The download should begin for the English version of the V-B4 owner's manual.
+	
+5. T-Can add an item to cart
+	As a user I can add an item to my cart
+	User is currently logged in and on the home page
+	Requirement - shop and cart functionality
+	Click on the shop tab. From the shop.ampeg.com page, click the 'Hardware' drop down menu and select 'Pedals'. On the first result, click 'Add to cart'.
+	Item should be added to cart and viewable when the user clicks on the shopping cart icon.
+	
+6. T-Can find artist's gear
+	As a user I can find a dealer to purchase the featured artist's gear
+	User is currently on the Ampeg.com home page and allows their browser to access their location
+	Requirment - Featuered artist and dealer search functionality
+	Scroll down to the featured artist tab and click 'LEARN MORE'. From the artist's page, click any of the products in the 'Gear' list. From that page click the 'FIND A DEALER' button.
+	User should be provided a selection of online retailers as well as local retailers and their locations/distance from user.
