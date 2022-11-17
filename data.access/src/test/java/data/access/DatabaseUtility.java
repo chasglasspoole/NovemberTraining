@@ -15,75 +15,75 @@ import java.util.List;
 
 
 public class DatabaseUtility implements DatabaseAccessor, DataRow {
+	
+	private String connectionString;
 
-	public ArrayList<String> ExecuteSingleColumn(String sql) throws SQLException {
+	public DatabaseUtility(String connectionString) {
+		this.connectionString = connectionString;
+	}
+
+	public String[] ExecuteSingleColumn(String sql) throws SQLException {
 		 
-		// Establishing a Connection
-		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sakila?allowPublicKeyRetrieval=true&useSSL=false", "root", "P@ssw0rd");
-		// create statement
-		Statement stmt = connection.createStatement();
-		//execute query
-		ResultSet rs = stmt.executeQuery(sql);
+		Connection connection = null;
+		connection = connectToDatabase();
+		Statement statement = connection.createStatement();
+		ResultSet resultSet = statement.executeQuery(sql);
 			
 		//Store data in Collection so resultSet can be closed
-		List<HashMap<String,Object>> result = convertResultSetToList(rs);
+		List<HashMap<String,Object>> result = convertResultSetToList(resultSet);
 
-		rs.close();
-		stmt.close();
+		resultSet.close();
+		statement.close();
 		connection.close();
 		
 		ArrayList<String> resultArray = parseMapList(result);
 		
-		return resultArray;
+		return resultArray.toArray(String[]::new);
 	}
 
 	public String ExecuteSingleCell(String sql, String key) throws SQLException {
-		// Establishing a Connection
-		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sakila?allowPublicKeyRetrieval=true&useSSL=false", "root", "P@ssw0rd");
-		// create statement
-		Statement stmt = connection.createStatement();
-		//execute query
-		ResultSet rs = stmt.executeQuery(sql);
+		Connection connection = null;
+		connection = connectToDatabase();
+		Statement statement = connection.createStatement();
+		ResultSet resultSet = statement.executeQuery(sql);
 		
 		String result = null;
-		while(rs.next()) {
-			result = rs.getString(key).toString();
+		while(resultSet.next()) {
+			result = resultSet.getString(key).toString();
 		}
 		
-		rs.close();
-		stmt.close();
+		resultSet.close();
+		statement.close();
 		connection.close();
 		
 		return result;
 	}
 
 	public List<String[]> Execute(String sql) throws SQLException {
-		// Establishing a Connection
-		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sakila?allowPublicKeyRetrieval=true&useSSL=false", "root", "P@ssw0rd");
-		// create statement
-		Statement stmt = connection.createStatement();
-		//execute query
-		ResultSet rs = stmt.executeQuery(sql);
+		Connection connection = null;
+		connection = connectToDatabase();
+		Statement statement = connection.createStatement();
+		ResultSet resultSet = statement.executeQuery(sql);
 		
 		//get column count
-		ResultSetMetaData rsMetaData = rs.getMetaData();
+		ResultSetMetaData rsMetaData = resultSet.getMetaData();
 		int cols = rsMetaData.getColumnCount();
 		
 		List<String[]> output = new ArrayList<String[]>();
-		String[] colNames = this.GetColumns(rs);
+		String[] colNames = this.GetColumns(resultSet);
 		output.add(colNames);
 		
 		//populate datarow with string[] (records/rows)
-		while(rs.next()) {
+		while(resultSet.next()) {
 			String[] row = new String[cols];
 			for(int i = 0; i < cols; i++) 
 			{
-				row[i] = rs.getString(colNames[i]);
+				row[i] = resultSet.getString(colNames[i]);
 			}
 			output.add(row);
 		}
-		rs.close();
-		stmt.close();
+		resultSet.close();
+		statement.close();
 		connection.close();
 		
 		return output;
@@ -102,42 +102,38 @@ public class DatabaseUtility implements DatabaseAccessor, DataRow {
 		return colNames;
 	}
 	
-	public ArrayList<String> ExecuteStoredProcedure(String sql, int p) throws SQLException{
-		// Establishing a Connection
-		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sakila?allowPublicKeyRetrieval=true&useSSL=false", "root", "P@ssw0rd");
-		// create statement
-		CallableStatement stmt = connection.prepareCall(sql);
+	public String[] ExecuteStoredProcedure(String sql) throws SQLException{
+		Connection connection = null;
+		connection = connectToDatabase();
+		CallableStatement statement = connection.prepareCall(sql);
 		
 		//register parameters
-		stmt.setInt(1, p);
-		stmt.setInt(2,2);
-		stmt.registerOutParameter(3, Types.INTEGER);
+		statement.registerOutParameter(3, Types.INTEGER);
 		
-		//execute query
-		ResultSet rs = stmt.executeQuery();
+		ResultSet resultSet = statement.executeQuery();
 		
 		//Store data in Collection so resultSet can be closed
-		List<HashMap<String,Object>> result = convertResultSetToList(rs);
+		List<HashMap<String,Object>> result = convertResultSetToList(resultSet);
 
-		rs.close();
-		stmt.close();
+		resultSet.close();
+		statement.close();
 		connection.close();
 				
 		ArrayList<String> resultArray = parseMapList(result);
 				
-		return resultArray;
+		return resultArray.toArray(String[]::new);
 		
 	}
 	
 	public List<HashMap<String,Object>> convertResultSetToList(ResultSet rs) throws SQLException {
-	    ResultSetMetaData md = rs.getMetaData();
-	    int columns = md.getColumnCount();
+	    ResultSetMetaData metaData = rs.getMetaData();
+	    int columns = metaData.getColumnCount();
 	    List<HashMap<String,Object>> list = new ArrayList<HashMap<String,Object>>();
 
 	    while (rs.next()) {
 	        HashMap<String,Object> row = new HashMap<String, Object>(columns);
 	        for(int i=1; i<=columns; ++i) {
-	            row.put(md.getColumnName(i),rs.getObject(i));
+	            row.put(metaData.getColumnName(i),rs.getObject(i));
 	        }
 	        list.add(row);
 	    }
@@ -151,17 +147,17 @@ public class DatabaseUtility implements DatabaseAccessor, DataRow {
 		
 		//iterate through list of hash map objects then cast to string and add to array list
 		while(it.hasNext()) {
-			HashMap<String, Object> hm =  (HashMap<String, Object>) it.next();
-			for (Object obj : hm.keySet()) {
-				ar.add( hm.get(obj).toString());
+			HashMap<String, Object> hashMap =  (HashMap<String, Object>) it.next();
+			for (Object obj : hashMap.keySet()) {
+				ar.add( hashMap.get(obj).toString());
 			}
 		}
 		
 		return ar;
 	}
 
+	private Connection connectToDatabase() throws SQLException {
+		return DriverManager.getConnection(this.connectionString);
+	}
 	
 }
-
-
-
