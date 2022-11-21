@@ -19,7 +19,7 @@ public class SanityTests {
 	
 	@Test
 	public void canLaunchChromeDriver() {
-		var driverPath = "C:\\Users\\chase\\Downloads\\chromedriver_win32";
+		var driverPath = "C:\\Users\\chase\\Downloads\\chromedriver_win32\\chromedriver.exe";
 		var url = "https://www.selenium.dev/";
 		System.setProperty("webdriver.chrome.driver", driverPath);
 
