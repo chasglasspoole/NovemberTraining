@@ -16,5 +16,12 @@ public class HomePage extends PageObject {
 		
 		return new SearchResultsPage(this.driver);
 	}
+	
+	public HistoryPage clickHistoryLink() {
+		var menuLink = this.driver.findElement(By.cssSelector("a[title=History]"));
+		menuLink.click();
+		
+		return new HistoryPage(this.driver);
+	}
 
 }
