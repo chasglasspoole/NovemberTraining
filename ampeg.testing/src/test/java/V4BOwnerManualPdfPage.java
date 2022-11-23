@@ -8,6 +8,7 @@ public class V4BOwnerManualPdfPage extends PageObject {
 	}
 
 	public String findManualTitle() {
+		switchActiveWindow();
 		var pdfTitle = this.driver.findElement(By.cssSelector("span[id='title'")).getText();
 		
 		return pdfTitle;

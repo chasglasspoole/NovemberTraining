@@ -4,16 +4,15 @@ import org.testng.annotations.Test;
 
 public class AmpegSupportTests extends AmpegTests{
   @Test
-  public void canFindVB4OwnerManual() {
-	  var expectedTitle = "Ampeg V-4B Owner's Manual - Rev A, English";
+  public void canFindVB4Manuals() {
+	  var expectedTitle = "V-4B Manuals";
 	  
-	  var manualTitle = new HomePage(this.driver)
+	  var pageTitle = new HomePage(this.driver)
 			  .clickSupportLink()
 			  .clickCurrentManualsLink()
 			  .clickV4BLink()
-			  .clickEnglishOwnerManual()
-			  .findManualTitle();
+			  .getPageTitle();
 	  
-	  assertEquals(manualTitle, expectedTitle, "Should find title of V-4B owner manual");
+	  assertEquals(pageTitle, expectedTitle, "Should find title of V-4B owner manual");
   }
 }

@@ -14,4 +14,10 @@ public class V4BManualsPage extends PageObject {
 		
 		return new V4BOwnerManualPdfPage(this.driver);
 	}
+	
+	public String getPageTitle() {
+		var pageTitle = this.driver.findElement(By.cssSelector("h1[class=fancy]")).getText();
+		
+		return pageTitle;
+	}
 }
