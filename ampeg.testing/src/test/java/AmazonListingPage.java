@@ -8,6 +8,7 @@ public class AmazonListingPage extends PageObject {
 	}
 	
 	public String getProductTitle() {
+		switchActiveWindow();
 		var productTitle = this.driver.findElement(By.cssSelector("#productTitle")).getText();
 	
 		return productTitle;

@@ -23,5 +23,19 @@ public class HomePage extends PageObject {
 		
 		return new HistoryPage(this.driver);
 	}
+	
+	public SupportPage clickSupportLink() {
+		var supportLink = this.driver.findElement(By.cssSelector("a[title=Support]"));
+		supportLink.click();
+		
+		return new SupportPage(this.driver);
+	}
+	
+	public artistPage clickArtistLink() {
+		var artistLink = this.driver.findElement(By.cssSelector("a[title=Artists]"));
+		artistLink.click();
+		
+		return new artistPage(this.driver);
+	}
 
 }
