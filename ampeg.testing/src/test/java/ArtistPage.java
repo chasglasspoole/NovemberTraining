@@ -1,9 +1,9 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class artistPage extends PageObject {
+public class ArtistPage extends PageObject {
 
-	public artistPage(WebDriver driver) {
+	public ArtistPage(WebDriver driver) {
 		super(driver);
 	}
 
@@ -14,10 +14,10 @@ public class artistPage extends PageObject {
 		return new productsPage(this.driver);
 	}
 	
-	public artistPage clickSteveCook() {
+	public ArtistPage clickSteveCook() {
 		var steveCookLink = this.driver.findElement(By.linkText("Steve Cook"));
 		steveCookLink.click();
 		
-		return new artistPage(this.driver);
+		return new ArtistPage(this.driver);
 	}
 }

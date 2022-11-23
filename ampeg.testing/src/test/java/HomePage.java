@@ -31,11 +31,40 @@ public class HomePage extends PageObject {
 		return new SupportPage(this.driver);
 	}
 	
-	public artistPage clickArtistLink() {
+	public ArtistPage clickArtistLink() {
 		var artistLink = this.driver.findElement(By.cssSelector("a[title=Artists]"));
 		artistLink.click();
 		
-		return new artistPage(this.driver);
+		return new ArtistPage(this.driver);
+	}
+	
+	public HomePage signIn() {
+		var loginIcon = this.driver.findElement(By.cssSelector("a[title=Account]"));
+		loginIcon.click();
+		var userNameBox = this.driver.findElement(By.cssSelector("input[name=l_user]"));
+		userNameBox.sendKeys("chaseglasspoole");
+		var passwordBox = this.driver.findElement(By.cssSelector("input[name=l_pass]"));
+		passwordBox.sendKeys("Chaseman09");
+		var submitButton = this.driver.findElement(By.cssSelector("button[name=submit]"));
+		submitButton.submit(); 
+		
+		return new HomePage(this.driver);
+	}
+	
+	public String checkSignedIn() {
+		var loginIcon = this.driver.findElement(By.cssSelector("a[title=Account]"));
+		loginIcon.click();
+		var welcomeText = this.driver.findElement(By.xpath("//*[@id='account-subnav']/div/div/div")).getText();
+		
+		return welcomeText;
+		
+	}
+	
+	public ShopPage clickShopLink() {
+		var shopIcon = this.driver.findElement(By.cssSelector("a[title=Shop"));
+		shopIcon.click();
+		
+		return new ShopPage(this.driver);
 	}
 
 }
