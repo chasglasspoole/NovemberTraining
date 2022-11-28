@@ -8,7 +8,7 @@ public class SupportPage extends PageObject {
 	}
 	
 	public ManualsPage clickCurrentManualsLink() {
-		var currentManualsLink = this.driver.findElement(By.cssSelector("a[href='https://ampeg.com/support/manuals/'"));
+		var currentManualsLink = this.driver.findElement(By.xpath("//h4[.='CURRENT MANUALS']/.."));
 		currentManualsLink.click();
 		
 		return new ManualsPage(this.driver);

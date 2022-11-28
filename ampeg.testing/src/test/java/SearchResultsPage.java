@@ -9,7 +9,7 @@ public class SearchResultsPage extends PageObject {
 	
 	public String findFirstSearchResult() {
 		var searchResult = this.driver
-				.findElement(By.cssSelector("#r1-0 span[class='EKtkFWMYpwzMKOYr0GYm LQVY1Jpkk8nyJ6HBWKAk'"))
+				.findElement(By.cssSelector("#r1-0 a[data-testid='result-title-a']"))
 				.getText();
 				
 		return searchResult;

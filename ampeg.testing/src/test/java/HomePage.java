@@ -38,13 +38,13 @@ public class HomePage extends PageObject {
 		return new ArtistPage(this.driver);
 	}
 	
-	public HomePage signIn() {
+	public HomePage signIn(String user, String pass) {
 		var loginIcon = this.driver.findElement(By.cssSelector("a[title=Account]"));
 		loginIcon.click();
 		var userNameBox = this.driver.findElement(By.cssSelector("input[name=l_user]"));
-		userNameBox.sendKeys("chaseglasspoole");
+		userNameBox.sendKeys(user);
 		var passwordBox = this.driver.findElement(By.cssSelector("input[name=l_pass]"));
-		passwordBox.sendKeys("Chaseman09");
+		passwordBox.sendKeys(pass);
 		var submitButton = this.driver.findElement(By.cssSelector("button[name=submit]"));
 		submitButton.submit(); 
 		
