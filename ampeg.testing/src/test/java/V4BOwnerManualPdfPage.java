@@ -3,8 +3,8 @@ import org.openqa.selenium.WebDriver;
 
 public class V4BOwnerManualPdfPage extends PageObject {
 
-	public V4BOwnerManualPdfPage(WebDriver driver) {
-		super(driver);
+	public V4BOwnerManualPdfPage(WebDriver driver, String baseUrl) {
+		super(driver, baseUrl);
 	}
 
 	public String findManualTitle() {

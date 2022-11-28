@@ -7,7 +7,7 @@ public class AmpegHistoryTests extends AmpegTests {
 	public void canFindHistoryBookOnAmazon() {
 		var expectedTitle = "Ampeg: The Story Behind the Sound";
 
-		var bookTitle = new HomePage(this.driver)
+		var bookTitle = new HomePage(this.driver, BASEURL)
 				.clickHistoryLink()
 				.clickAmazonLink()
 				.getProductTitle();

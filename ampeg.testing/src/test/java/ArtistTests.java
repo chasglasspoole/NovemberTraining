@@ -7,7 +7,7 @@ public class ArtistTests extends AmpegTests{
   public void navToDealerForArtistGear() {
 	  var expectedTabName = "Online Retailers";
 	  
-	  var tabName = new HomePage(this.driver)
+	  var tabName = new HomePage(this.driver, BASEURL)
 			  .clickArtistLink()
 			  .clickSteveCook()
 			  .clickGearLink()

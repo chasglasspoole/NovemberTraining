@@ -7,7 +7,7 @@ public class AmpegShopTests extends AmpegTests {
   public void canAddItemToCart() throws InterruptedException {
 	  var expectedResult = "1";
 	  
-	  var actualResult = new HomePage(this.driver)
+	  var actualResult = new HomePage(this.driver, BASEURL)
 			  .clickShopLink()
 			  .clickHardwareDropdown()
 			  .addItemToCart();

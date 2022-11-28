@@ -7,7 +7,7 @@ public class AmpegSupportTests extends AmpegTests{
   public void canFindVB4Manuals() {
 	  var expectedTitle = "V-4B Manuals";
 	  
-	  var pageTitle = new HomePage(this.driver)
+	  var pageTitle = new HomePage(this.driver, BASEURL)
 			  .clickSupportLink()
 			  .clickCurrentManualsLink()
 			  .clickV4BLink()

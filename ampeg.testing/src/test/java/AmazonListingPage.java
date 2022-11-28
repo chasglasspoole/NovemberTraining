@@ -3,8 +3,8 @@ import org.openqa.selenium.WebDriver;
 
 public class AmazonListingPage extends PageObject {
 
-	public AmazonListingPage(WebDriver driver) {
-		super(driver);
+	public AmazonListingPage(WebDriver driver, String baseUrl) {
+		super(driver, baseUrl);
 	}
 	
 	public String getProductTitle() {

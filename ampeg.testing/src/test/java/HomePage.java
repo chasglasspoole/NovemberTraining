@@ -3,8 +3,8 @@ import org.openqa.selenium.WebDriver;
 
 public class HomePage extends PageObject {
 
-	public HomePage(WebDriver driver) {
-		super(driver);
+	public HomePage(WebDriver driver, String baseUrl) {
+		super(driver, baseUrl);
 	}
 	
 	public SearchResultsPage enterSearch() {
@@ -14,28 +14,28 @@ public class HomePage extends PageObject {
 		searchBar.sendKeys("svt-810e");
 		searchBar.submit();
 		
-		return new SearchResultsPage(this.driver);
+		return new SearchResultsPage(this.driver, baseUrl);
 	}
 	
 	public HistoryPage clickHistoryLink() {
 		var menuLink = this.driver.findElement(By.cssSelector("a[title=History]"));
 		menuLink.click();
 		
-		return new HistoryPage(this.driver);
+		return new HistoryPage(this.driver, baseUrl);
 	}
 	
 	public SupportPage clickSupportLink() {
 		var supportLink = this.driver.findElement(By.cssSelector("a[title=Support]"));
 		supportLink.click();
 		
-		return new SupportPage(this.driver);
+		return new SupportPage(this.driver, baseUrl);
 	}
 	
 	public ArtistPage clickArtistLink() {
 		var artistLink = this.driver.findElement(By.cssSelector("a[title=Artists]"));
 		artistLink.click();
 		
-		return new ArtistPage(this.driver);
+		return new ArtistPage(this.driver, baseUrl);
 	}
 	
 	public HomePage signIn(String user, String pass) {
@@ -48,7 +48,7 @@ public class HomePage extends PageObject {
 		var submitButton = this.driver.findElement(By.cssSelector("button[name=submit]"));
 		submitButton.submit(); 
 		
-		return new HomePage(this.driver);
+		return new HomePage(this.driver, baseUrl);
 	}
 	
 	public String checkSignedIn() {

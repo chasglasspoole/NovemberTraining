@@ -3,8 +3,8 @@ import org.openqa.selenium.WebDriver;
 
 public class V4BManualsPage extends PageObject {
 
-	public V4BManualsPage(WebDriver driver) {
-		super(driver);
+	public V4BManualsPage(WebDriver driver, String baseUrl) {
+		super(driver, baseUrl);
 	}
 
 	public V4BOwnerManualPdfPage clickEnglishOwnerManual() {
@@ -12,7 +12,7 @@ public class V4BManualsPage extends PageObject {
 				.findElement(By.cssSelector("a[href='/data/6/0a020a41e58d5e0b91edd46ce/application/pdf/Owner’s Manual - English .pdf']"));
 		engOwnerManualLink.click();
 		
-		return new V4BOwnerManualPdfPage(this.driver);
+		return new V4BOwnerManualPdfPage(this.driver, baseUrl);
 	}
 	
 	public String getPageTitle() {

@@ -3,8 +3,8 @@ import org.openqa.selenium.WebDriver;
 
 public class productsPage extends PageObject {
 
-	public productsPage(WebDriver driver) {
-		super(driver);
+	public productsPage(WebDriver driver, String baseUrl) {
+		super(driver, baseUrl);
 	}
 
 	public String locateOnlineDealerTab() {

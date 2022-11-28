@@ -3,8 +3,8 @@ import org.openqa.selenium.WebDriver;
 
 public class hardwareShopPage extends PageObject {
 
-	public hardwareShopPage(WebDriver driver) {
-		super(driver);
+	public hardwareShopPage(WebDriver driver, String baseUrl) {
+		super(driver, baseUrl);
 	}
 
 	public String addItemToCart() throws InterruptedException {

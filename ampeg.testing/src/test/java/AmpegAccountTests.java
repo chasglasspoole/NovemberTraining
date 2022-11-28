@@ -7,7 +7,7 @@ public class AmpegAccountTests extends AmpegTests {
   public void canSignIn() {
 	  var expectedText = "Welcome chaseglasspoole. Sign Out";
 	  
-	  var welcomeText = new HomePage(this.driver)
+	  var welcomeText = new HomePage(this.driver, BASEURL)
 			  .signIn("chaseglasspoole", "Chaseman09")
 			  .checkSignedIn();
 	  

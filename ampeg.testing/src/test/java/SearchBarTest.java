@@ -6,7 +6,7 @@ public class SearchBarTest extends AmpegTests {
   public void ensureCorrectSearchResultDisplayed() {
 	  var expectedResult = "Ampeg: Classic Series - SVT-810E";
 	  
-	  var searchResult = new HomePage(this.driver)
+	  var searchResult = new HomePage(this.driver, BASEURL)
 			  .enterSearch()
 			  .findFirstSearchResult();
 	  

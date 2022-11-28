@@ -8,6 +8,7 @@ import org.testng.annotations.BeforeMethod;
 
 public abstract class AmpegTests {
 
+	protected final String BASEURL = "https://ampeg.com/";
 	protected DriverManager driverManager; 
 	protected WebDriver driver;
 	protected String driverType;
@@ -29,8 +30,7 @@ public abstract class AmpegTests {
 		driverManager = DriverManagerFactory.getManager(driverType);
 		driverManager.createDriver();
 		driver = driverManager.getDriver();
-		var url = "https://www.ampeg.com/";
-		this.driver.navigate().to(url);
+		this.driver.navigate().to(BASEURL);
 	}
 
 	private String getDriverType() {
