@@ -64,7 +64,7 @@ public class HomePage extends PageObject {
 		var shopIcon = this.driver.findElement(By.cssSelector("a[title=Shop"));
 		shopIcon.click();
 		
-		return new ShopPage(this.driver);
+		return new ShopPage(this.driver, baseUrl);
 	}
 
 }
