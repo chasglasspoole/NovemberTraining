@@ -14,7 +14,7 @@ public abstract class AmpegTests {
 	protected String driverType;
 
 	@BeforeMethod
-	public void beforeMethod() {
+	public void beforeMethod() throws Exception {
 		this.launchDriver();
 	}
 
@@ -25,7 +25,7 @@ public abstract class AmpegTests {
 
 
 
-	private void launchDriver() {	 
+	private void launchDriver() throws Exception {	 
 		driverType = this.getDriverType();
 		driverManager = DriverManagerFactory.getManager(driverType);
 		driverManager.createDriver();
