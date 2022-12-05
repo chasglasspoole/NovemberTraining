@@ -19,10 +19,13 @@ public class SelectMenuTests extends TestBase {
   
   @Test
   public void canGetAllMenuOptions() {
-	  String[] expectedOptions = {"Red","Blue","Green","Yellow","Purple","Black","White","Violet","Indigo","Magenta","Aqua"};
+	  String[] expectedOptions = {"Red","Blue","Green","Yellow","Purple","Black","White","Voilet","Indigo","Magenta","Aqua"};
 	  
 	  var actualOptions = new SelectMenuPage(this.driver, this.BASEURL)
-			  .getAllOptions();  
+			  .getAllOptions(); 
+	  
+	  assertEquals(actualOptions, expectedOptions, "Should return all options");
+
   }
   
   @Test

@@ -15,23 +15,18 @@ public class Slider extends ControlExtensions implements ISlider {
 
 	@Override
 	public void setVaule(String value, WebDriver driver) {
-		//((JavascriptExecutor)driver).executeScript("arguments[0].setAttribute('value', '"+value+"')",mappedElement);
-		
 		Dimension sliderSize = mappedElement.getSize();
 		int sliderWidth = sliderSize.getWidth();
 		int startPoint = sliderWidth/2;
 		int val = Integer.parseInt(value);
-		//float xOffset = val*((float)sliderWidth/100);
 						
 		Actions moveToStart = new Actions(driver);   
 		moveToStart.moveToElement(mappedElement).moveByOffset(-startPoint, 0).click().build().perform();
 		
-		//Actions moveToValue = new Actions(driver);
-		//moveToValue.moveToElement(mappedElement).click().build().perform();
-		
 		for(int i = 0; i <= val-1; i++) {
 		mappedElement.sendKeys(Keys.ARROW_RIGHT);	
 		}	
+		return;
 	}
 
 	@Override

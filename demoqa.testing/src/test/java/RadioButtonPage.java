@@ -25,4 +25,11 @@ public class RadioButtonPage extends PageObject {
 		String selectedLabel = radioGroup.getSelected();
 		return selectedLabel;
 	}
+	
+	public boolean isButtonEnabled(String label) {
+		navigateDirect(url);
+		RadioGroup radioGroup = new RadioGroup(radioGroupElement);
+		RadioButton button = radioGroup.getButton(label);
+		return button.isEnabled();
+	}
 }

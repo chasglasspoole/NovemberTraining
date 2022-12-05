@@ -8,10 +8,10 @@ import foundation.PageObject;
 
 public class SliderPage extends PageObject {
 	private String url = "slider/";
-	
+
 	@FindBy(how=How.XPATH, using="//span[@class='range-slider__wrap']/input")
 	private WebElement sliderElement;
-	
+
 	protected SliderPage(WebDriver driver, String baseUrl) {
 		super(driver, baseUrl);
 	}
@@ -22,12 +22,10 @@ public class SliderPage extends PageObject {
 		slider.setVaule(value, this.driver);
 		return this;
 	}
-	
+
 	public String getSliderValue() {
 		Slider slider = new Slider(sliderElement);
 		var sliderValue = slider.getValue();
 		return sliderValue; 
 	}
-
-	
 }
