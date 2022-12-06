@@ -1,8 +1,10 @@
 package controlExtensions;
 
+import org.openqa.selenium.WebDriver;
+
 public interface IMultiSelect {
 
-	public void selectOptions(String[] options);
-	
-	public String[] getSelectedOptions();
+	public String[] getSelectedOptions(WebDriver driver);
+
+	void selectOptions(int selections, WebDriver driver);
 }

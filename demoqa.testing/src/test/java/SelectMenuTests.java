@@ -30,11 +30,11 @@ public class SelectMenuTests extends TestBase {
   
   @Test
   public void canSelectMultipleOptions() {
-	  String[] expectedSelectedOptions = {"Saab","Opel"};
+	  String[] expectedSelectedOptions = {"Blue","Green"};
 	  
-	  String[] optionValues = {"saab", "opel"};
+	  var selections = 2;
 	  var actualSelectedOptions = new SelectMenuPage(this.driver, this.BASEURL)
-			  .selectMultipleItem(optionValues);
+			  .selectMultipleItem(selections);
 	  
 	  assertEquals(actualSelectedOptions, expectedSelectedOptions, "Should return all selected options");
   }

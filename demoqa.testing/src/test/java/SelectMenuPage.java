@@ -13,7 +13,7 @@ import foundation.PageObject;
 public class SelectMenuPage extends PageObject {
 	private String url = "select-menu/";
 	
-	@FindBy(how=How.ID, using="cars")
+	@FindBy(how=How.XPATH, using="//input[@id='react-select-4-input']//ancestor::div[@class=' css-yk16xz-control']")
 	private WebElement multiSelectMenuElement;
 	
 	@FindBy(how=How.ID, using="oldSelectMenu")
@@ -50,11 +50,11 @@ public class SelectMenuPage extends PageObject {
 	}
 
 
-	public String[] selectMultipleItem(String[] optionValues) {
+	public String[] selectMultipleItem(int selections) {
 		navigateDirect(url);
 		MultiSelect menuElement = new MultiSelect(multiSelectMenuElement);
-		menuElement.selectOptions(optionValues);
+		menuElement.selectOptions(selections, this.driver);
 		
-		return menuElement.getSelectedOptions();
+		return menuElement.getSelectedOptions(this.driver);
 	}
 }
