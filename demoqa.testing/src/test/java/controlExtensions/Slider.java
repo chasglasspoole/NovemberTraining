@@ -18,12 +18,12 @@ public class Slider extends ControlExtensions implements ISlider {
 		int sliderWidth = sliderSize.getWidth();
 		int startPoint = sliderWidth/2;
 		int val = Integer.parseInt(value);
-						
+
 		Actions moveToStart = new Actions(driver);   
 		moveToStart.moveToElement(mappedElement).moveByOffset(-startPoint, 0).click().build().perform();
-		
+
 		for(int i = 0; i <= val-1; i++) {
-		mappedElement.sendKeys(Keys.ARROW_RIGHT);	
+			mappedElement.sendKeys(Keys.ARROW_RIGHT);	
 		}	
 		return;
 	}

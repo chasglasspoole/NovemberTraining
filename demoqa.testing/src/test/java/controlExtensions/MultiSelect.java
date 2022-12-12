@@ -19,8 +19,6 @@ public class MultiSelect extends ControlExtensions implements IMultiSelect{
 
 	@Override
 	public void selectOptions(int selections, WebDriver driver) {
-		//WebDriverWait wait = new WebDriverWait(driver, 1);
-		//wait.until(ExpectedConditions.elementToBeClickable(mappedElement));
 		driver.switchTo().defaultContent();
 		mappedElement.click();
 		for(int i = 0; i < selections; i++) {
