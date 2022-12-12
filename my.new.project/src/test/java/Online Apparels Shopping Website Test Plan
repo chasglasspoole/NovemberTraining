@@ -1,0 +1,205 @@
+Online Apparels Shopping Website Test Plan
+
+Table of Contents
+
+1. Overview
+
+	1.1 Purpose
+	1.2 Scope
+
+2. Testing Summary
+
+	2.1 In Scope
+	2.2 Out of Scope
+
+3. Test Strategy
+
+	3.1 Test Type & Approach
+	3.2 Test Risks & Issues
+	3.3 Test Execution Schedule
+	3.4 Testing Tools
+
+4. Test Objectives
+
+5. Test Criteria
+
+6. Test Environment
+
+7. Test Deliverables
+
+	7.1 Deliverables before Testing
+	7.2 Deliverables during Testing 
+	7.3 Deliverables after Testing 
+
+_____________________________________________________________________________________________________________________________________________
+
+1. Overview
+
+	1.1 Purpose
+	The Test Plan has been created to communicate the test approach to team members. It includes the objectives, scope, schedule, risks and approach.  
+	This document will clearly identify what the test deliverables will be and what is deemed in and out of scope.
+
+	1.2	Scope
+	This document details the testing that will be performed by the project team for the Online Apparels Shopping Website project. It defines the 
+	overall testing requirements and provides an integrated view of the project test activities. Its purpose is to document:
+	-	What will be tested
+	-	How testing will be performed
+	-	What resources are needed, and when
+
+2. Testing Summary
+	The scope of the project is to design and develop an online ecommerce website for apparels. Customers will be able to use the frontend website 
+	for searching the apparels and place the order by making online payment of the order in advance. Web based admin panel/ backend will help admin 
+	user i.e. business owner to manage the products, categories, prices and orders placed by the customers. Testing scope will cover actions that 
+	can be done by the buyer or admin, but not things managed by third parties.
+
+ 	2.1 In scope
+ 
+ 	Buyer
+	-	Login
+	-	Registration
+	-	Search products
+	-	Product listing and search results
+	-	Product details with available variations 
+	-	Add to cart
+	-	Add to Wishlist
+	-	Checkout and Online payment of the orders 
+	-	Share products on social media
+	-	Place the order
+	-	My account
+	-	Order history
+	-	Order tracking
+
+	 Admin
+	-	Ability to create/edit/delete products
+	-	Manage product categories and sub-categories 
+	-	Manage product catalog
+	-	Manage orders
+	-	Manage customers 
+	-	Manage shipping
+	-	Manage payments
+	-	Manage roles/ permissions 
+	-	CMS pages management
+	-	Statistics and reports
+
+	2.2 Out of scope
+	-	Ordering customized products 
+	-	Real time order tracking 
+	-	Cash On Delivery option for buyer
+
+3. Test Strategy
+
+	3.1 Test Type & Approach
+	Approach: This project will follow an Agile approach with weekly iterations. Each week will contain sprints with specific objectives to be 
+	tested and delivered.
+	Manual tests: All in scope functionalities will be manually tested to ensure correct functionality before automation. 
+	Automated Tests: Unit Tests will serve as the foundation for the testing approach. These will test individual functionality as well as 
+	ensure nothing breaks during integration testing. 
+	System Testing: This will test performance and load handling to evaluate compliance with the specified requirements. 
+
+	3.2 Test Risks & Issues
+	- Lack of knowledge with new system
+	- Funding and resource allocation for project and testing
+	- Developer resources
+	- Timeline for enterprise platform updates will impact execution of testing and delivery plan
+
+3.3 Test Execution Schedule
+
+	Test Planning
+	-	Review test requirements and scope
+	-	Formulate test team and roles
+	-	Create initial test estimates
+	-	Establish test environment
+	Testing Phase
+	-	Functional testing / unit tests
+	-	Integration testing
+	-	System testing
+	-	Regression testing 
+	-	Performance testing
+	-	Install / uninstall testing 
+	Test Analysis
+	-	Test results
+	-	Test status report
+
+	3.4 Testing Tools
+	Test Case Creation – Microsoft Excel
+	Test Case Tracking – Microsoft Excel
+	Test Case Execution – Manual, Selenium automation
+	Test Case Management – GitHub
+	Test Defect Management – GitHub
+
+4. Test Objectives
+
+	Functional requirements high priority
+	-	Description | Requirement #
+	-	Login | FR-001
+	-	Registration | FR-002
+	-	Product search | FR-003
+	-	Product listing | FR-004
+	-	Product details | FR-005
+	-	Wishlist | FR-006
+	-	Shopping cart | FR-007
+	-	Checkout & payment | FR-008
+	-	My account | FR-0010
+	-	Order history | FR-0012
+	-	Contact support | FR-0013
+	-	Login | FR-0014
+	-	Dashboard | FR-0015
+	-	Buyers’ management | FR-0016
+	-	Orders management | FR-0017
+	-	Product categories management | FR-0018
+	-	Products management | FR-0019
+	-	Payments management | 
+	-	Statistics & reports | FR-0021
+	-	System users’ management | FR-0022
+	-	Roles management | FR-0023
+	-	CMS management | FR-0024
+	-	Complaints & feedback | FR-0026
+	
+	Functional requirements low priority 
+	-	Social media sharing | FR-009
+	-	Ratings & reviews | FR-0020
+	-	Email management | FR-0025
+	
+	Performance objectives
+	-	Scalability: The website repository shall accommodate up to 100 users concurrently
+	-	Speed: web pages should not take more than 30 seconds to load in good speed of internet.
+	-	Reliability: Web pages should not get broken and display page not found error if page is not available.
+	-	Security: SSL security and encryption for online payments. 
+
+5. Test Criteria
+
+	Suspension Criteria
+	-	If 50% of current tests fail, testing is suspended until issues are resolved 
+	Exit Criteria
+	-	90% of all tests and 100% of critical test must pass for a feature to be suitable for public release 
+
+6. Test Environment
+
+	Software
+	-	Web browser: Chrome Version 108.0.5359.96, Edge Version 108.0.1462.46, Firefox Version 107.0.1
+	-	Automated Tests: Eclipse IDE 2022-12
+	-	Windows 10 Pro Virtual machines
+	
+	Hardware
+	-	QA Testing company machines 
+
+7. Test Deliverables
+
+	7.1 Deliverables before Testing
+	Test Plan – Gives overview of what to and not to test
+	Traceability Matrix – Allows for tracking of tests to their respective requirements
+	
+	7.2 Deliverables during Testing 
+	Manual Test Cases
+	Unit Test Scripts
+	Integrations Tests Results
+	Test Error and Execution Logs
+	
+	7.3 Deliverables after Testing 
+	Test Results
+	Test Status Report
+	Test Metrics
+	Release Notes
+
+
+
