@@ -1,22 +1,11 @@
 package tests;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.testng.Assert.assertTrue;
-
-import java.time.Instant;
 import java.util.ArrayList;
-import java.util.List;
-
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.net.httpserver.Authenticator.Result;
-
 import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.response.ResponseBody;
 import io.restassured.specification.RequestSpecification;
@@ -29,26 +18,22 @@ class restTests {
 		RestAssured.baseURI = "https://reqres.in/";
 	}
 
-	@Test
-	void verifyEmailAddress() {
-		var expectedEmail = "janet.weaver@reqres.in"; 
+	@Test public void verifyEmailAddressForId2() {
+		var expectedEmail = "janet.weaver@reqres.in";
 
-		RequestSpecification httpRequest = RestAssured.given();
-		Response response = httpRequest.get("api/users/2");
+		RestAssured.baseURI = "https://reqres.in/api/users/2";
 
-		ResponseBody body = response.getBody();
+		Response response = given()
+				.queryParam("page", "2")
+				.body("")
+				.when()
+				.get()
+				.then()
+				.extract().response();
 
-		JSONResult responseBody = body.as(JSONResult.class);
-
-
-		var actualEmail = responseBody.getData().getEmail();
-		//var actualEmail = response.jsonPath().getString("email");
-
-		assertEquals(expectedEmail, actualEmail, "Returns email of id 2"); 
+		assertEquals(expectedEmail, response.jsonPath().getString("data.email"));
 	}
-
-
-
+	
 	@Test public void successfulLoginVerifyToken() {
 		var expectedToken = "QpwL5tke4Pnpja7X4";
 
@@ -74,11 +59,11 @@ class restTests {
 		var expectedStatusCode = 204;
 
 		Response response = given()
-                .header("Content-type", "application/json")
-                .when()
-                .delete("api/users/2")
-                .then()
-                .extract().response();
+				.header("Content-type", "application/json")
+				.when()
+				.delete("api/users/2")
+				.then()
+				.extract().response();
 
 		var actualStatusCode = response.statusCode();
 
@@ -93,53 +78,57 @@ class restTests {
 		var requestBody = requestParams.toString();
 
 		Response response = given()
-                .header("Content-type", "application/json")
-                .and()
-                .body(requestBody)
-                .when()
-                .patch("api/users/2")
-                .then()
-                .extract().response();
+				.header("Content-type", "application/json")
+				.and()
+				.body(requestBody)
+				.when()
+				.patch("api/users/2")
+				.then()
+				.extract().response();
 
 		assertEquals("Morpheus2", response.jsonPath().getString("name")); 
 		assertNotNull(response.jsonPath().getString("updatedAt"));	
 	}
 
-@Test public void putRequestVerification() {
+	@Test public void putRequestVerification() {
 
 		JSONObject requestParams = new JSONObject();
 		requestParams.put("name", "Morpheus2");
 		var requestBody = requestParams.toString();
 
 		Response response = given()
-                .header("Content-type", "application/json")
-                .and()
-                .body(requestBody)
-                .when()
-                .put("api/users/2")
-                .then()
-                .extract().response();
+				.header("Content-type", "application/json")
+				.and()
+				.body(requestBody)
+				.when()
+				.put("api/users/2")
+				.then()
+				.extract().response();
 
 		assertEquals("Morpheus2", response.jsonPath().getString("name")); 
 		assertNotNull(response.jsonPath().getString("updatedAt"));	
 	}
 
-@Test public void canDeserializeUserIntoObject() {
+	@Test public void canDeserializeUserIntoObject() {
+		
+		RestAssured.baseURI = "https://reqres.in";
 
-	RequestSpecification httpRequest = RestAssured.given();
-	Response response = httpRequest.get("api/users/2");
+		RequestSpecification httpRequest = RestAssured.given();
+		Response response = httpRequest.get("api/users/2");
 
-	ResponseBody body = response.getBody();
+		ResponseBody body = response.getBody();
 
-	JSONResult user = body.as(JSONResult.class);
+		JSONResult user = body.as(JSONResult.class);
 
-	assertEquals(2, user.getData().getId(),"Returns id of user object");
-	assertEquals("janet.weaver@reqres.in", user.getData().getEmail(),"Returns email of user object");
-	assertEquals("Janet", user.getData().getFirst_name(),"Returns first name of user object");
-	assertEquals("Weaver", user.getData().getLast_name(), "Returns last name of user object");
-}
+		assertEquals(2, user.getData().getId(),"Returns id of user object");
+		assertEquals("janet.weaver@reqres.in", user.getData().getEmail(),"Returns email of user object");
+		assertEquals("Janet", user.getData().getFirst_name(),"Returns first name of user object");
+		assertEquals("Weaver", user.getData().getLast_name(), "Returns last name of user object");
+	}
 
 	@Test public void canDeserializeIntoCollectionOfObjects() {
+
+		RestAssured.baseURI = "https://reqres.in";
 
 		String[] expectedUsers = new String[] {"Michael", "Lindsay", "Tobias", "Byron", "George", "Rachel"}; 
 
@@ -160,16 +149,4 @@ class restTests {
 
 		assertArrayEquals(expectedUsers, actualUsers, "returns collection of users first names"); 
 	}
-	/*@Test public void verifyEmailAddressForId2() {
-		var expectedEmail = "janet.weaver@reqres.in";
-
-		Response response = given()
-                .contentType(ContentType.JSON)
-                .when()
-                .get("api/user/2")
-                .then()
-                .extract().response();
-
-		assertEquals(expectedEmail, response.jsonPath().getString("email"));
-	}*/
 }
