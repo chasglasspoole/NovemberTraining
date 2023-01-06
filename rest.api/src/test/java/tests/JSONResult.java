@@ -1,14 +1,14 @@
 package tests;
 
 public class JSONResult {
-	
+
 	private Data data;
 	private Support support;
-	
+
 	public Data getData() {
 		return this.data;
 	}
-	
+
 	public void setData(Data data) {
 		this.data = data;
 	}
