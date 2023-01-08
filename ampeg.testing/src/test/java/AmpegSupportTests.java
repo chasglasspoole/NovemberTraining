@@ -2,6 +2,8 @@ import static org.testng.Assert.assertEquals;
 
 import org.testng.annotations.Test;
 
+import pages.HomePage;
+
 public class AmpegSupportTests extends AmpegTests{
   @Test
   public void canFindVB4Manuals() {

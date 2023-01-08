@@ -2,6 +2,8 @@ import static org.testng.Assert.assertEquals;
 
 import org.testng.annotations.Test;
 
+import pages.HomePage;
+
 public class AmpegAccountTests extends AmpegTests {
   @Test
   public void canSignIn() {

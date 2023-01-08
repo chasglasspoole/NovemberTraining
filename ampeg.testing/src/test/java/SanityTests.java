@@ -19,12 +19,9 @@ public class SanityTests {
 	
 	@Test
 	public void canLaunchChromeDriver() {
-		var driverPath = "C:\\Users\\chase\\Downloads\\chromedriver_win32\\chromedriver.exe";
+	
 		var url = "https://www.selenium.dev/";
-		System.setProperty("webdriver.chrome.driver", driverPath);
-
-		this.driver = new ChromeDriver();
-		driver.navigate().to(url);
+		this.driver.navigate().to(url);
 		var currentUrl = driver.getCurrentUrl();
 
 		assertEquals(currentUrl, url, "if selenium is setup correctly then navigating to the url should be successful.");  

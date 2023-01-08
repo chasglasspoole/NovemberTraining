@@ -1,3 +1,5 @@
+package foundation;
+
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
@@ -7,7 +9,7 @@ public class EdgeDriverManager extends DriverManager {
 
 	@Override
 	public void createDriver() {
-		var driverPath = "C:\\Users\\chase\\Downloads\\edgedriver_win32\\msedgedriver.exe";
+		var driverPath = "C:\\temp\\msedgedriver.exe";
 		System.setProperty("webdriver.edge.driver", driverPath);
 
 		WebDriver driver;

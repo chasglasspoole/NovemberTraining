@@ -10,7 +10,7 @@ public class ChromeDriverManager extends DriverManager{
 	
 	@Override
 	public void createDriver() {
-		var driverPath = "C:\\Users\\chase\\Downloads\\chromedriver_win32\\chromedriver.exe";
+		var driverPath = "C:\\temp\\chromedriver.exe";
 		System.setProperty("webdriver.chrome.driver", driverPath);
 
 		WebDriver driver;

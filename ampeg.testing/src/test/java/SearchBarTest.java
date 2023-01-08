@@ -1,6 +1,8 @@
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import pages.HomePage;
+
 public class SearchBarTest extends AmpegTests {
   @Test
   public void ensureCorrectSearchResultDisplayed() {
