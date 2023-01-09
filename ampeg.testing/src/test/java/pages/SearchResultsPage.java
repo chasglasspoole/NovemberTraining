@@ -16,5 +16,12 @@ public class SearchResultsPage extends PageObject {
 
 		return searchResult;
 	}
+	
+	public ProductsPage clickFirstResult() {
+		var searchResult = this.driver.findElement(By.cssSelector("#r1-0 a[data-testid='result-title-a']"));
+		searchResult.click();
+		
+		return new ProductsPage(this.driver,this.baseUrl);
+	}
 
 }

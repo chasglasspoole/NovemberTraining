@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 public class hardwareShopPage extends PageObject {
@@ -9,18 +10,12 @@ public class hardwareShopPage extends PageObject {
 		super(driver, baseUrl);
 	}
 
-	public String addItemToCart() throws InterruptedException {
+	public ShoppingCartPage addItemToCart() throws InterruptedException {
 		var addItemButton = this.driver
-				.findElement(By.xpath("//a[contains(.,'Classic Analog Bass Preamp Pedal')]/../../..//button"));
-		addItemButton.click();
-		
-		Thread.sleep(2000);
-		
-		var shopCartIcon = this.driver.findElement(By.xpath("//a[@class='action showcart']"));
-		shopCartIcon.click();
-		
-		var cartItems = this.driver.findElement(By.xpath("//div[@id='minicart-content-wrapper']//span[@class='count']")).getText();
-		
-		return cartItems;
+				.findElement(By.xpath("//a[@class='button button--primary'][1]"));
+		JavascriptExecutor executor = (JavascriptExecutor)this.driver;
+		executor.executeScript("arguments[0].click();", addItemButton);
+				
+		return new ShoppingCartPage(this.driver, this.baseUrl);
 	}
 }

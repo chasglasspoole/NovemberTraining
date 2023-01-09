@@ -2,8 +2,17 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
 
 public class HomePage extends PageObject {
+	
+	@FindBy(how=How.XPATH, using = "//a[@title='Artists']")
+	private WebElement artistsButton;
+	
+	@FindBy(how=How.CSS, using = "a[title=Shop")
+	private WebElement shopIcon;
 
 	public HomePage(WebDriver driver, String baseUrl) {
 		super(driver, baseUrl);
@@ -34,7 +43,7 @@ public class HomePage extends PageObject {
 	}
 	
 	public ArtistPage clickArtistLink() {
-		var artistLink = this.driver.findElement(By.cssSelector("a[title=Artists]"));
+		var artistLink = artistsButton;
 		artistLink.click();
 		
 		return new ArtistPage(this.driver, baseUrl);
@@ -63,7 +72,6 @@ public class HomePage extends PageObject {
 	}
 	
 	public ShopPage clickShopLink() {
-		var shopIcon = this.driver.findElement(By.cssSelector("a[title=Shop"));
 		shopIcon.click();
 		
 		return new ShopPage(this.driver, baseUrl);

@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
 
 public abstract class PageObject {
 	protected WebDriver driver;
@@ -10,6 +11,8 @@ public abstract class PageObject {
 	protected PageObject(WebDriver driver, String baseUrl) {
 		this.driver = driver;
 		this.baseUrl = baseUrl;
+		
+		InitPageFactory();
 	}
 
 	protected void switchActiveWindow() {
@@ -22,11 +25,8 @@ public abstract class PageObject {
 			}
 		}
 	}
-
-	/*protected PageObject navigateDirect() {
-		String fullUrl = baseUrl + URL;
-		this.driver.navigate().to(fullUrl);
-		
-		return new PageObject(this.driver, baseUrl);
-	}*/
+	
+	private void InitPageFactory() {
+		PageFactory.initElements(this.driver, this);
+	}
 }
