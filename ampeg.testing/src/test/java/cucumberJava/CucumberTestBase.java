@@ -1,4 +1,4 @@
-package tests;
+package cucumberJava;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -6,35 +6,27 @@ import java.util.Scanner;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 
 import foundation.DriverManager;
 import foundation.DriverManagerFactory;
-import io.cucumber.java.en.Given;
 
-public abstract class AmpegTests {
+public class CucumberTestBase {
 
-	protected final String BASEURL = "https://ampeg.com/";
 	protected DriverManager driverManager; 
 	protected WebDriver driver;
 	protected String driverType;
-
-	@BeforeMethod
-	public void beforeMethod() throws Exception {
-		this.launchDriver();
-	}
 
 	@AfterMethod
 	public void Cleanup() {
 		driverManager.quitDriver();
 	}
 
-	private void launchDriver() throws Exception {	 
+	public void launchDriver(String url) throws Exception {	 
 		driverType = this.getDriverType();
 		driverManager = DriverManagerFactory.getManager(driverType);
 		driverManager.createDriver();
 		driver = driverManager.getDriver();
-		this.driver.navigate().to(BASEURL);
+		this.driver.navigate().to(url);
 	}
 
 	private String getDriverType() {

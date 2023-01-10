@@ -17,37 +17,12 @@
 ## (Comments)
 #Sample Feature Definition Template
 @tag
-Feature: Title of your feature
-  I want to use this template for my feature file
-
-  @tag1
-  Scenario: Title of your scenario
-    Given I want to write a step with precondition
-    And some other precondition
-    When I complete action
-    And some other action
-    And yet another action
-    Then I validate the outcomes
-    And check more outcomes
-
-  @tag2
-  Scenario Outline: Title of your scenario outline
-    Given I want to write a step with <name>
-    When I check for the <value> in step
-    Then I verify the <status> in step
-
-    Examples: 
-      | name  | value | status  |
-      | name1 |     5 | success |
-      | name2 |     7 | Fail    |
-
-      
-@tag
 Feature: FR002
 	As a user I can view specifications for individual products
 	
 	@tag1
 	Scenario: Product Specifications Exist
-		Given I am on Ampeg website
-		When I am viewing a product
-		Then I can view specifications
+		Given I am on the Ampeg home page
+		When I search for a product
+		And I click on the result
+		Then I can view the product specifications 
