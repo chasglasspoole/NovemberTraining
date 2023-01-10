@@ -2,7 +2,7 @@ package foundation;
 
 public class DriverManagerFactory {
 	
-	public static DriverManager getManager(String browserType) {
+	public static DriverManager getManager(String browserType) throws Exception {
 		
 		DriverManager driverManager = null;
 		
@@ -14,8 +14,7 @@ public class DriverManagerFactory {
 			driverManager = new EdgeDriverManager();
 			break;
 		default:
-			//driverManager = new ChromeDriverManager();
-			break;
+			throw new Exception("Driver not supported. Try using chrome or edge");
 		}
 		
 		return driverManager;

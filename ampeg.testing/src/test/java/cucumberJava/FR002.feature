@@ -16,13 +16,16 @@
 #""
 ## (Comments)
 #Sample Feature Definition Template
-@tag
+@FR2
 Feature: FR002
 	As a user I can view specifications for individual products
 	
-	@tag1
+	@FR2
 	Scenario: Product Specifications Exist
 		Given I am on the Ampeg home page
 		When I search for a product
 		And I click on the result
 		Then I can view the product specifications 
+		
+
+	
