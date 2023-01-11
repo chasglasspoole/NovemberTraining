@@ -1,8 +1,14 @@
 package cucumberJava;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 
 import io.cucumber.java.After;
 import io.cucumber.java.en.And;
@@ -38,10 +44,35 @@ public class Annotation extends CucumberTestBase{
 		findDealerButton.click();
 	}
 
+	@When("^I click on the artists button$")
+	public void clickArtistsButton() {
+		var artistLink = this.driver.findElement(By.xpath("//a[@title='Artists']"));
+		artistLink.click();
+	}
+
+	@When("^I click on the shop button$")
+	public void clickShopButton() {
+		var shopLink = this.driver.findElement(By.cssSelector("a[title=Shop"));
+		shopLink.click();
+	}
+
 	@And("^I click on the result$")
 	public void clickFirstResult() {
 		var searchResult = this.driver.findElement(By.cssSelector("#r1-0 a[data-testid='result-title-a']"));
 		searchResult.click();
+	}
+
+	@And("^I add an item to my cart$")
+	public void addItemToCart() {
+		var productDropDown = this.driver.findElement(By.xpath("//a[@aria-label='Hardware']/i"));
+		productDropDown.click();
+		var pedalsOption = this.driver.findElement(By.xpath("//a[@aria-label='Pedals']"));
+		pedalsOption.click();
+
+		var addItemButton = this.driver
+				.findElement(By.xpath("//a[@class='button button--primary'][1]"));
+		JavascriptExecutor executor = (JavascriptExecutor)this.driver;
+		executor.executeScript("arguments[0].click();", addItemButton);
 	}
 
 	@Then("^I can view the product specifications$")
@@ -63,7 +94,7 @@ public class Annotation extends CucumberTestBase{
 
 		var specs = this.driver.findElement(By.xpath("//div[@class='specsCopy']")).getText();
 
-		assertEquals(expectedResult, specs, "Should return product specification");
+		assertEquals(specs, expectedResult, "Should return product specification");
 	}
 
 	@Then("^I can see the online retailers$")
@@ -72,9 +103,28 @@ public class Annotation extends CucumberTestBase{
 
 		var tabName = this.driver.findElement(By.cssSelector("li[class=oma-active]>a")).getText();	
 
-		assertEquals(expectedTabName, tabName, "Should find online retailers tab name");
+		assertEquals(tabName, expectedTabName, "Should find online retailers tab name");
 	}
-	
+
+	@Then("^I can view all the artists$")
+	public void getAllArtists() {
+		List<WebElement> artistsList = new ArrayList<WebElement>();
+
+		artistsList = this.driver.findElements(By.xpath("//span[@class='nombre']")); 
+		var artistCount = artistsList.size();
+
+		assertNotNull(artistCount);
+	}
+
+	@Then("^I can view items in my cart$")
+	public void getCartDescription() {
+		var expectedDesc = "Your Cart (1 item)";
+
+		var cartDescription = this.driver.findElement(By.className("page-heading")).getAttribute("innerText");
+
+		assertEquals(cartDescription, expectedDesc, "returns shopping cart contents description");
+	}
+
 	@After
 	public void Cleanup() {
 		driverManager.quitDriver();

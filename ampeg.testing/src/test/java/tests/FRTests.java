@@ -55,20 +55,20 @@ public class FRTests extends AmpegTests {
 				.enterSearch()
 				.clickFirstResult()
 				.locateOnlineDealerTab();
-		
+
 		assertEquals(expectedTabName, tabName, "Should return Online Dealers Tab name");
 	}
-	
+
 	@Test
 	public void FR_005_CanViewCartItems() throws InterruptedException {
-		 var expectedResult = "Your Cart (1 item)";
-		  
-		  var actualResult = new HomePage(this.driver, BASEURL)
-				  .clickShopLink()
-				  .clickHardwareDropdown()
-				  .addItemToCart()
-				  .getCartDescription();
-		  
-		  assertEquals(actualResult, expectedResult, "Should return quantity of items in cart");
+		var expectedResult = "Your Cart (1 item)";
+
+		var actualResult = new HomePage(this.driver, BASEURL)
+				.clickShopLink()
+				.clickHardwareDropdown()
+				.addItemToCart()
+				.getCartDescription();
+
+		assertEquals(actualResult, expectedResult, "Should return quantity of items in cart");
 	}
 }

@@ -7,7 +7,7 @@ import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions( features = {"src/test/java/cucumberJava"}, glue = {"cucumberJava",})
 public class RunCucumberTests extends AbstractTestNGCucumberTests {
-  @Test
-  public void runTests() {
-  }
+	@Test
+	public void runTests() {
+	}
 }
