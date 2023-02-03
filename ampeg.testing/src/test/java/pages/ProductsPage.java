@@ -31,4 +31,9 @@ public class ProductsPage extends PageObject {
 		var specs = specText.getText();
 		return specs;
 	}
+	
+	public String getProductSpecsIncorrectly() {
+		var specs = specText.getAttribute("text");
+		return specs;
+	}
 }

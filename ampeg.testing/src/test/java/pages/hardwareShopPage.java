@@ -10,11 +10,10 @@ public class hardwareShopPage extends PageObject {
 		super(driver, baseUrl);
 	}
 
-	public ShoppingCartPage addItemToCart() throws InterruptedException {
+	public ShoppingCartPage addItemToCart() {
 		var addItemButton = this.driver
-				.findElement(By.xpath("//a[@class='button button--primary'][1]"));
-		JavascriptExecutor executor = (JavascriptExecutor)this.driver;
-		executor.executeScript("arguments[0].click();", addItemButton);
+				.findElement(By.xpath("//a[@class='button button--primary add-to-cart'][1]"));
+		addItemButton.click();
 				
 		return new ShoppingCartPage(this.driver, this.baseUrl);
 	}
